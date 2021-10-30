@@ -86,7 +86,7 @@ public class LibroPersistence extends Persistence {
             if (titulo == null || titulo.isEmpty()) {
                 throw new Exception("title null or empty");
             }
-            
+
             Libro libro = (Libro) em.createQuery("SELECT l"
                     + " FROM Libro l"
                     + " WHERE l.titulo = :titulo").
@@ -97,21 +97,45 @@ public class LibroPersistence extends Persistence {
             throw e;
         }
     }
-    
-    public Collection<Libro> searchBooksByNameAuthor(Integer id) throws Exception{
+
+    /**
+     * Method that returns a list of books according to their publisher
+     * remaining copies
+     *
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Collection<Libro> searchBooksByNameAuthor(Integer id) throws Exception {
         try {
-            if(id == null){
+            if (id == null) {
                 throw new Exception("id null");
             }
-//            Collection<Libro> books = em.createQuery("SELECT l"
-//                    + " FROM Libro l"
-//                    + " JOIN l.EDITORIAL_ID e"
-//                    + " WHERE .EDITORIAL_ID = :editorial_id").
-//                    setParameter("editorial_id", id).
-//                    getResultList();
-            
-            Collection<Libro> libros = (Collection<Libro>) em.createNativeQuery("SELECT * FROM libro WHERE editorial_id = " + id).getResultList();
-            return libros;
+            Collection<Libro> books = (Collection<Libro>) em.createNativeQuery("SELECT * FROM libro WHERE AUTOR_ID = " + id).getResultList();
+            return books;
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    
+    /**
+     * Method that returns a list of books according to their publisher
+     * remaining copies
+     *
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public Collection<Libro> searchBooksByNamePublisher(Integer id) throws Exception {
+        try {
+            if (id == null) {
+                throw new Exception("id null");
+            }
+            Collection<Libro> books = (Collection<Libro>) em.createNativeQuery("SELECT * FROM libro WHERE EDITORIAL_ID = " + id).getResultList();
+            return books;
         } catch (Exception e) {
             throw e;
         }

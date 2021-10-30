@@ -28,6 +28,8 @@ public class ExerciseOneLibreria {
         LibroServicie libroServicie = new LibroServicie();
 //        libroServicie.createLibro(15000000000L, "El principe ", 1999, 200, "Facundo", "mendocina");
         libroServicie.searchListBooks("mendocina");
+        libroServicie.searchListBooksByAuthor("Facundo");
+
     }
-    
+
 }

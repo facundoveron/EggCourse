@@ -8,6 +8,7 @@ package exerciseonelibreria.servicie;
 import exerciseonelibreria.Persistence.AutorPersistence;
 import exerciseonelibreria.Persistence.EditorialPersistence;
 import exerciseonelibreria.Persistence.LibroPersistence;
+import exerciseonelibreria.entities.Autor;
 import exerciseonelibreria.entities.Editorial;
 import exerciseonelibreria.entities.Libro;
 import java.util.Collection;
@@ -20,12 +21,14 @@ public class LibroServicie {
 
     private EditorialPersistence editorialPersistence = new EditorialPersistence();
     private LibroPersistence libroPersistence;
+    private AutorPersistence autorPersistence;
 
     /**
      * Constructer method
      */
     public LibroServicie() {
         this.libroPersistence = new LibroPersistence();
+        this.autorPersistence = new AutorPersistence();
     }
 
     /**
@@ -122,19 +125,38 @@ public class LibroServicie {
         }
     }
 
+    /**
+     * Method that searches and displays books by publisher
+     *
+     * @param nombre
+     * @throws Exception
+     */
     public void searchListBooks(String nombre) throws Exception {
         try {
             Editorial editorial = editorialPersistence.searchEditorialByName(nombre);
-            if(editorial == null){
+            if (editorial == null) {
                 throw new Exception("publisher not found");
             }
-            Collection<Libro> books = libroPersistence.searchBooksByNameAuthor(editorial.getId());
-            if(books.size() > 0){
-                books.forEach(aux ->{
-                    System.out.println("Titulo: " + aux.getTitulo());
-                });
-            }else{
-                System.out.println("no");
+            Collection<Libro> books = libroPersistence.searchBooksByNamePublisher(editorial.getId());
+            for (Object aux : books) {
+                Object[] items = (Object[]) aux;
+                System.out.println(" Isbn: " + items[0] + " Alta: " + items[1] + " Year: " + items[2] + " Copies: " + items[3] + " Borrowed Copies " + items[4] + " Remaining Copies: " + items[5] + " Title: " + items[6]);
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
+    public void searchListBooksByAuthor(String nameAutor) throws Exception {
+        try {
+            Autor autor = autorPersistence.searchAuthorByName(nameAutor);
+            if (autor == null) {
+                throw new Exception("author not found");
+            }
+            Collection<Libro> books = libroPersistence.searchBooksByNameAuthor(autor.getId());
+            for (Object aux : books) {
+                Object[] items = (Object[]) aux;
+                System.out.println(" Isbn: " + items[0] + " Alta: " + items[1] + " Year: " + items[2] + " Copies: " + items[3] + " Borrowed Copies " + items[4] + " Remaining Copies: " + items[5] + " Title: " + items[6]);
             }
         } catch (Exception e) {
             throw e;
