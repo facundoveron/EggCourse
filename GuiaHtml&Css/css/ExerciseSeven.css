@@ -1,0 +1,18 @@
+*{
+    background-color: red;
+}
+
+#encabezadoUno{
+    font-style: oblique;
+    text-align: center;
+}
+
+#encabezadoDos{
+    font-style: inherit;
+    text-align: center;
+}
+
+p{
+    text-align:left;
+    color: white;
+}

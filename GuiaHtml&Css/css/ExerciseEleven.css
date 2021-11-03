@@ -1,0 +1,24 @@
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.encabezado{
+    background-color:gray;
+    font-weight: bold;
+}
+
+th, td{
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+}
+
+.cambio{
+    background-color: #E6F3FF;
+    font-weight: bold;
+}
+
+.numeros{
+    background-color: beige;
+}

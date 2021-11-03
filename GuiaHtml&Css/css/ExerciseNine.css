@@ -1,0 +1,26 @@
+#menu ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    font-family: Arial;
+    font-size: 11pt;
+}
+
+#menu ul li{
+    background-color: #666;
+}
+
+#menu ul li a{
+    color: #cccccc;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 10px;
+}
+
+#menu ul li a:hover {
+    background: #000;
+    border-left: 10px solid #333;
+    color: #fff;
+}
