@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Libreria</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div
+      class="container"
+      style="
+        background: url(https://resourcefurniture.com/wp-content/uploads/2018/12/TU_Libreria_01.jpg)
+          no-repeat center center;
+        min-height: 100%;
+        background-size: cover;
+        min-height: 700px;"
+    >
+      <div class="row" style="margin: auto">
+        <div class="col" style="margin-top: 200px">
+          <div class="card" style="width: 18rem; margin: auto">
+            <img
+              src="https://aws.admagazine.com/prod/designs/v1/assets/1200x628/76442.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Cargar Autor</h5>
+              <p class="card-text">
+                Administrar Autores: cargar datos de un autor
+              </p>
+              <form action="/admin" method="GET">
+	              <button class="btn btn-primary">Acceder</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col" style="margin-top: 200px">
+          <div class="card" style="width: 18rem; margin: auto">
+            <img
+              src="https://2.bp.blogspot.com/-NkSEpTYagcw/VUfcRyax1RI/AAAAAAAAACI/-F_wHwGw13U/s1600/0010887719.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">Listar Autores</h5>
+              <p class="card-text">
+                Administrar Autores:modificar datos, listar autores y dar de
+                baja
+              </p>
+              <form action="/list/mostrar" method="GET">
+	              <button class="btn btn-primary">Acceder</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
