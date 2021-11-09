@@ -22,4 +22,19 @@ public class IndexController {
 	public String publisher() {
 		return "Publisher.html";
 	}
+	
+	@GetMapping("/book")
+	public String book() {
+		return "Book.html";
+	}
+	
+	@GetMapping("/loan")
+	public String loan() {
+		return "Loan.html";
+	}
+	
+	@GetMapping("/customer")
+	public String customer() {
+		return "Customer.html";
+	}
 }
