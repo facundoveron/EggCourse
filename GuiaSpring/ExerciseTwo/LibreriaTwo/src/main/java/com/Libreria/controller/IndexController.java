@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class IndexController {
 	
-	@GetMapping("")
+	@GetMapping("/")
 	public String index() {
-		return "index.html";
+		return "Index.html";
 	}
 	
+	@GetMapping("/author")
+	public String author() {
+		return "Author.html";
+	}
+	
+	@GetMapping("/publisher")
+	public String publisher() {
+		return "Publisher.html";
+	}
 }
