@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Libreria</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+</head>
+
+<body>
+	<ul class="nav justify-content-end">
+		<li class="nav-item">
+		  <a class="nav-link active" href="#">Index</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="#">Customer</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="#">Loan</a>
+		</li>
+		<li class="nav-item">
+		  <a class="nav-link" href="#">Book</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Author</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Publisher</a>
+		</li>
+	  </ul>
+	<div class="container" style="background: url(https://madridfree.org/wp-content/uploads/2014/07/Tuuu-Libreria-3.jpg) no-repeat center center; min-height: 100%; min-width: 100%; background-size: cover;">
+		<div class="row">
+			<div class="col-12" style="margin-top: 50px; margin-bottom: 50px;">
+				<h1 style="Text-align: center; margin: auto; font-family: cursive; color: white">EGG Bookstore</h1>
+				<h1 style="Text-align: center; margin: auto; font-family: cursive; color: white">Book reservation system</h1>
+			</div>
+			<div class="col-12" style="max-height: 350px; max-width: 500px; margin: auto; overflow: auto;">
+				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+					<ol class="carousel-indicators">
+					  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+					  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+					  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					</ol>
+					<div class="carousel-inner" >
+					  <div class="carousel-item active">
+						<img class="d-block w-100" src="https://image.freepik.com/foto-gratis/estudiante-durmiendo-biblioteca-noche_99043-2027.jpg" alt="First slide">
+						<div class="carousel-caption d-none d-md-block">
+						  <h3 style="color:black;"><strong>Creates new customers</strong></h3>
+						  <p style="color:black;"><strong>loans to registered persons</strong></p>
+						</div>
+					  </div>
+					  <div class="carousel-item">
+						<img class="d-block w-100" src="https://sprites.comohacerpara.com/img/12202a-bibliotecas-virtuales-estudiantes-libros-digitales.jpg" alt="Second slide" overflow="hidden">
+							<div class="carousel-caption d-none d-md-block">
+								<h3 style="color:black;"><strong>Select any book in the database</strong></h3>
+								<p style="color:black;"><strong>In loan section</strong></p>
+							</div>
+						</div>
+					  <div class="carousel-item">
+						<img class="d-block w-100" src="https://static.timesofisrael.com/www/uploads/2019/05/Untitled-16.jpg" alt="Third slide">
+							<div class="carousel-caption d-none d-md-block">
+								<h3 style="color:black;"><strong>Variety of authors</strong></h3>
+							</div>
+					  </div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+					  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					  <span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+					  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+					  <span class="sr-only">Next</span>
+					</a>
+			</div>
+		</div> 
+		<div class="col-12" style="min-width: 100%; margin-top: 20px">
+			<footer class="bg-light text-center text-lg-start">
+				<div class="container p-4">
+					<!--Grid row-->
+					<div class="row">
+					  <!--Grid column-->
+					  <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+						<h5 class="text-uppercase">Intention of the page</h5>
+				
+						<p>
+							A page where you can simulate a bookstore system, where there is a Book that has an Author, a Publisher. And there is also a Customer, generating a relationship that derives in a Loan. 
+						</p>
+					  </div>
+					  <!--Grid column-->
+				
+					  <!--Grid column-->
+					  <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+						<h5 class="text-uppercase">Explanation of the page</h5>
+				
+						<p>
+							This is the index, where a screenshot of the idea is given, and with a Navs with links to the different entities to view or create. To generate a loan, you need a book and a client and in this way, if one or both of the parts do not exist, you have to create them.
+						</p>
+					  </div>
+					  <!--Grid column-->
+					</div>
+					<!--Grid row-->
+				  </div>
+				  <!-- Grid container -->
+				
+				  <!-- Copyright -->
+				  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+					© 2021 Copyright:
+					<a class="text-dark" href="https://mdbootstrap.com/">facundoveron</a>
+				  </div>
+				  <!-- Copyright -->
+			</footer>
+		</div>
+	</div>
+	
+	
+	
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
