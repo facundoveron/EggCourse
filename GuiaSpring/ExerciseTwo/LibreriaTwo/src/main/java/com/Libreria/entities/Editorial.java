@@ -40,6 +40,7 @@ public class Editorial {
 	}
 
 
+	//Get and Set
 	public String getId() {
 		return id;
 	}

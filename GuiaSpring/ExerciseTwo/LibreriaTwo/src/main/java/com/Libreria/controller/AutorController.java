@@ -24,19 +24,20 @@ public class AutorController {
 		try {
 			modelo.addAttribute("autor", autorService.listAuthor());
 		} catch (ErrorService e) {
-			// TODO: handle exception
+			throw e;
 		}
 		return "ListAuthor.html";
 	}
 	
 	@PostMapping("/baja/{parametro}")
-	public String unsubscribeAuthor(@PathVariable("parametro") String parametro) throws ErrorService{
+	public String unsubscribeAuthor(ModelMap model,@PathVariable("parametro") String parametro) throws ErrorService{
 		try {
 			autorService.cancelAuthor(parametro);
 		} catch (Exception e) {
-			throw e;
+			model.put("error", e.getMessage());
+			return "ListAuthor.html";
 		}
-		return "redirect:/list/mostrar";
+		return "redirect:/author/mostrar";
 	}
 	
 	@GetMapping("/admin")
@@ -56,6 +57,6 @@ public class AutorController {
 			return "AdmiAuthor.html";
 		}
 		
-		return "Index.html";
+		return "redirect:/author/mostrar";
 	}
 }

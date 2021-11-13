@@ -10,27 +10,21 @@
 
 <body>
 	<div class="container">
+		<p th:if="${error != null}" th:text="${error}" style="color: red"></p>
 		<div class="row justify-content-center">
 			<table class="table table-striped">
 				<thead>
-					<tr>
+					<tr style="text-align: center">
 						<th>Nombre</th>
-						<th>Editar Autor</th>
 						<th>Eliminar Autor</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="autor : ${autor}" th:if="${autor.alta == true}">
+					<tr th:each="autor : ${autor}" th:if="${autor.alta == true}" style="text-align: center">
 						<td th:if="${autor.alta == true}" th:text="${autor.nombre}"></td>
 						<td>
-							<a th:if="${autor.alta == true}" method="POST">
-								<button type="button" class="btn btn-danger btn-sm">
-									Editar
-								</button>
-							</a>
-						</td>
-						<td>
-							<form th:if="${autor.alta == true}" th:action="@{/list/baja/} + ${autor.nombre}" method="POST">
+							<form th:if="${autor.alta == true}" th:action="@{baja/} + ${autor.nombre}"
+								method="POST">
 								<button class="btn btn-primary btn-sm">
 									Dar de baja
 								</button>
@@ -41,7 +35,6 @@
 			</table>
 		</div>
 	</div>
-
 	<!--
         <div class="col-sm" style="margin-left: 32px">
           <ul class="list-group list-group-flush" style="text-align: center">

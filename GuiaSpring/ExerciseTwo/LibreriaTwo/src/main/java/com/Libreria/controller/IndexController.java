@@ -20,12 +20,12 @@ public class IndexController {
 	
 	@GetMapping("/publisher")
 	public String publisher() {
-		return "Publisher.html";
+		return "redirect:/publisher/";
 	}
 	
 	@GetMapping("/book")
 	public String book() {
-		return "Book.html";
+		return "redirect:/book/";
 	}
 	
 	@GetMapping("/loan")

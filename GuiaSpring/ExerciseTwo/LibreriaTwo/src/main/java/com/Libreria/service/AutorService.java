@@ -82,6 +82,8 @@ public class AutorService {
 			}
 			
 			return autorRepository.findByNombre(nombre);
+		} catch (NullPointerException e) {
+			return null;
 		} catch (ErrorService e) {
 			throw e;
 		}

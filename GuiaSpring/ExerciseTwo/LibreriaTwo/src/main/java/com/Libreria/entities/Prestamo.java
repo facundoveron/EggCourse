@@ -20,9 +20,9 @@ public class Prestamo {
 	private String id;
 	private Boolean alta;
 	
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaPrestamo;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaDevolucion;
 	
 	@OneToOne
