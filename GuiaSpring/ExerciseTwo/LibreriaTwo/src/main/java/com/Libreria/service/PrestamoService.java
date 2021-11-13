@@ -1,6 +1,8 @@
 package com.Libreria.service;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -104,6 +106,71 @@ public class PrestamoService {
 			libroService.loanBook(libro);
 		} catch (NullPointerException e) {
 			throw new ErrorService("error system");
+		} catch (ErrorService e) {
+			throw e;
+		}
+	}
+	
+	@Transactional
+	public Collection<Prestamo> listAll() throws ErrorService{
+		try {
+			return prestamoRepository.findAll();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	@Transactional
+	public void cancelLoan(String id) throws ErrorService{
+		try {
+			if(id == null || id.trim().isEmpty()) {
+				throw new ErrorService("id null or empty");
+			}
+			
+			Optional<Prestamo> prestamo = prestamoRepository.findById(id);
+			if(prestamo.isPresent()) {
+				Prestamo loan = prestamo.get();
+				loan.setAlta(false);
+			}else {
+				throw new ErrorService("erros system");
+			}
+		} catch (ErrorService e) {
+			throw e;
+		}
+	}
+	
+	@Transactional
+	public Prestamo searchById(String id) {
+		try {
+			if(id == null || id.trim().isEmpty()) {
+				throw new ErrorService("id null or empty");
+			}
+			Optional<Prestamo> prestamo = prestamoRepository.findById(id);
+			if(prestamo.isPresent()) {
+				Prestamo loan = prestamo.get();
+				return loan;
+			}else {
+				throw new ErrorService("erros system");
+			}			
+		} catch (ErrorService e) {
+			return null;
+		}
+	}
+	
+	
+	@Transactional
+	public void updateDate(String id, Date date) throws ErrorService{
+		try {
+			if(id == null || id.trim().isEmpty()) {
+				throw new ErrorService("id null or empty");
+			}
+			if (date == null || date.before(new Date())) {
+				throw new ErrorService("date null or date incorret");
+			}
+			
+			Prestamo prestamo = searchById(id);
+			prestamo.setFechaDevolucion(date);
+			prestamoRepository.save(prestamo);
 		} catch (ErrorService e) {
 			throw e;
 		}
