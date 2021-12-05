@@ -1,6 +1,7 @@
 package com.Estancia.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,11 +14,14 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.Estancia.Entities.Usuario;
+import com.Estancia.Error.ErrorServicio;
 import com.Estancia.Repository.UsuarioRepository;
+import com.Estancia.PasswordEncoder;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 @Service("usuarioService")
 public class UsuarioService implements UserDetailsService {
@@ -40,5 +44,53 @@ public class UsuarioService implements UserDetailsService {
 			return null;			
 		}
 	}
-
+	
+	
+	@Transactional
+	public Usuario registrar(Usuario usuario) throws ErrorServicio{
+		try {
+			if(usuario.getEmail().trim().isEmpty() || usuario.getEmail() == null) {
+				throw new ErrorServicio("Email vacio o nulo");
+			}
+			if(usuario.getAlias().trim().isEmpty() || usuario.getAlias() == null) {
+				throw new ErrorServicio("Alias vacio o nulo");
+			}
+			if(usuario.getRole() == null) {
+				throw new ErrorServicio("Rol nulo");
+			}
+			if(usuario.getClave().trim().isEmpty() || usuario.getClave() == null) {
+				throw new ErrorServicio("Clave vacia o nula");
+			}
+			
+			Usuario user = usuarioRepository.findByEmail(usuario.getEmail());
+			if(user != null) {
+				throw new ErrorServicio("Este email ya esta registrado");
+			}
+			
+			if(usuario.getFechaBaja() != null) {
+				throw new ErrorServicio("Este usuario esta dado de baja");
+			}
+			
+			usuario.setClave(generatePassword(usuario.getClave()));
+			usuario.setFechaAlta(new Date());
+			return usuarioRepository.save(usuario);
+		} catch (ErrorServicio e) {
+			throw e;
+		}
+	}
+	
+	@Transactional
+	public String generatePassword(String password) {
+		password = PasswordEncoder.encriptPassword(password);
+		return password;
+	}
+	
+	public Boolean role(String email) {
+		Usuario usuario = usuarioRepository.findByEmail(email);
+		if(usuario.getRole().toString().equals("FAMILIA")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
