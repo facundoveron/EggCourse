@@ -20,7 +20,8 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 	
 	@GetMapping("/registre")
-	public String registre() {
+	public String registre(ModelMap model) {
+		model.put("usuario", new Usuario());
 		return "Registro";
 	}
 	
@@ -30,6 +31,8 @@ public class UsuarioController {
 			usuarioService.registrar(usuario);
 		} catch (ErrorServicio e) {
 			model.put("error", e.getMessage());
+			model.put("email", usuario.getEmail());
+			model.put("alias", usuario.getAlias());
 			return "Registro";
 		}
 		return "redirect:/";

@@ -17,34 +17,33 @@
 				<div class="">
 					<label for="exampleInputEmail1">Email</label>
 					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-						name="email" th:value="${email}">
+						name="email">
 				</div>
 				<div class="">
 					<label for="exampleInputEmail1">Alias</label>
 					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-						name="alias" th:value="${alias}">
+						name="alias">
 				</div>
 				<div class="mb-3" style="margin-top: 15px;">
-					<div class="input-group is-invalid" style="margin-left: 5px;">
-						<div class="form-check" style="margin: auto;">
-							<input class="form-check-input" type="radio" name="role" id="flexRadioDefault1" value="FAMILIA">
-							<label class="form-check-label" for="flexRadioDefault1">
-								Familia
-							</label>
+					<div class="input-group is-invalid">
+						<div class="input-group-prepend">
+							<label class="input-group-text" for="validatedInputGroupSelect">Role</label>
 						</div>
-						<div class="form-check" style="margin: auto;">
-							<input class="form-check-input" type="radio" name="role" id="flexRadioDefault2" value="CLIENTE">
-							<label class="form-check-label" for="flexRadioDefault2">
-								Cliente
-							</label>
-						</div>
+						<select class="custom-select" id="validatedInputGroupSelect" required>
+							<!--
+							<input type="hidden" name="role">
+							-->
+							<option value="FAMILIA" name="role">Familia</option>
+							<option name="role" value="CLIENTE">Cliente</option>
+							<input type="hidden" name="role" value="FAMILIA">
+							<input type="hidden" name="role" value="CLIENTE">
+						</select>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Clave</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" name="clave">
-				</div>
-				<button type="submit" class="btn btn-primary">Registrar</button>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Clave</label>
+						<input type="password" class="form-control" id="exampleInputPassword1" name="clave">
+					</div>
+					<button type="submit" class="btn btn-primary">Registrar</button>
 			</form>
 		</div>
 	</div>

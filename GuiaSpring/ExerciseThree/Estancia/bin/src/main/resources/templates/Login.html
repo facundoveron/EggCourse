@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Libreria</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+</head>
+
+<body style="background-color: rgb(0, 64, 128);">
+	<div class="container" style="margin-top: 100px;">
+		<div class="card bg-light mb-3" style="max-width: 25rem; margin: auto; text-align: center;">
+			<div class="card-header">Login</div>
+			<div th:if="${param.error}" style="color: red"> Error de Credenciales</div>
+			<form th:action="@{/logincheck}" th:object="${usuario}" style="padding: 20px;" method="POST">
+				<div class="">
+					<label for="exampleInputEmail1">Email address</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="email">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					<input type="password" class="form-control" id="exampleInputPassword1" name="clave">
+				</div>
+				<a href="/login/registrar">Registrate</a>
+				<br />
+				<button type="submit" class="btn btn-primary" style="margin-top: 10px;">Login</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

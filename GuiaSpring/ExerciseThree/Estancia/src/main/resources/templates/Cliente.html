@@ -8,8 +8,47 @@
 		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
 </head>
 
-<body>
-	Cliente
+<body style="background-color: rgb(0, 64, 128);">
+	<div class="container" style="margin-top: 100px;">
+		<div class="card bg-light mb-3" style="max-width: 25rem; margin: auto; text-align: center;">
+			<div class="card-header">Ultimos pasos del Registro</div>
+			<div th:if="${error != null}" th:text="${error}" style="color: red"> Error de Credenciales</div>
+			<form th:action="@{/user/registre}" th:object="${usuario}" style="padding: 20px;" method="POST">
+				<div class="">
+					<label for="exampleInputEmail1">Nombre</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="nombre" th:value="${nombre}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Ciudad</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="ciudad" th:value="${ciudad}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Pais</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="pais" th:value="${pais}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Calle</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="calle" th:value="${calle}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Codigo Postal</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="codPostal" th:value="${codPostal}">
+				</div>
+
+				<div class="">
+					<label for="exampleInputEmail1">Numero</label>
+					<input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="numero" th:value="${numero}">
+				</div>
+				<button type="submit" class="btn btn-primary" style="margin-top: 10px;">Registrar</button>
+			</form>
+		</div>
+	</div>
 </body>
 
 </html>
