@@ -30,7 +30,22 @@ public class ClienteController {
 	
 	@GetMapping("")
 	public String cliente(ModelMap model) {
-		model.addAttribute("cliente", new Cliente());
+		try {
+			String email = SecurityContextHolder.getContext().getAuthentication().getName();
+			if(clienteService.searchClienteByUsuario(usuarioService.searchByEmail(email)) == null) {
+				return "redirect:/cliente/registre";
+			}
+		} catch (Exception e) {
+			String error = "error en el sistema a la hora de verificar tu rol";
+			model.addAttribute("descripcion", error);
+			return "Error";
+		}
+		return "AlquilarCasas";
+	}
+	
+	@GetMapping("/registre")
+	public String registrarCliente(ModelMap model) {
+		model.put("cliente", new Cliente());
 		return "Cliente";
 	}
 	

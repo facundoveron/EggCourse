@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Estancia.Entities.Cliente;
+import com.Estancia.Entities.Familia;
+import com.Estancia.Entities.Usuario;
 import com.Estancia.Service.CasaService;
 import com.Estancia.Service.ClienteService;
+import com.Estancia.Service.FamiliaService;
 import com.Estancia.Service.UsuarioService;
 
 @Controller
@@ -32,6 +35,9 @@ public class IndexControllers {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@Autowired
+	FamiliaService familiaService;
+	
 	@GetMapping("")
 	public String index(ModelMap model, HttpSession httpSession) {
 		model.addAttribute("paises", casaService.listCountryHouse());
@@ -44,10 +50,14 @@ public class IndexControllers {
 	public String ponerEnAlquiler(ModelMap model, HttpSession session) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();		
 		try {
-			if (clienteService.searchClienteByUsuario(usuarioService.searchByEmail(email)) == null) {
-				String error = "Esta cuenta esta registrada como Familia, este es el motivo por el cual la pagina marca error. Una posible solucion es que registre una nueva cuenta como cliente. O que en configuraciones cambie su rol a CLIENTE";
+			Usuario usuario = usuarioService.searchByEmail(email);
+			Familia familia = familiaService.searchFamiliaByUsuario(usuario);
+			if (familia == null && usuario.getRole().toString().equals("CLIENTE")) {
+				String error = "Esta cuenta esta registrada como CLIENTE, este es el motivo por el cual la pagina marca error. Una posible solucion es que registre una nueva cuenta como FAMILIA. O que en configuraciones cambie su rol a FAMILIA";
 				model.put("descripcion", error);
 				return "Error";
+			}else if (familia == null && usuario.getRole().toString().equals("FAMILIA")){
+				return "redirect:/familia/registre";
 			}
 		} catch (Exception e) {
 			return "";
@@ -59,10 +69,14 @@ public class IndexControllers {
 	public String alquilar(ModelMap model, HttpSession session) {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();
 		try {
-			if (clienteService.searchClienteByUsuario(usuarioService.searchByEmail(email)) == null) {
+			Usuario usuario = usuarioService.searchByEmail(email);
+			Cliente cliente = clienteService.searchClienteByUsuario(usuario);
+			if (cliente == null && usuario.getRole().toString().equals("FAMILIA")) {
 				String error = "Esta cuenta esta registrada como Familia, este es el motivo por el cual la pagina marca error. Una posible solucion es que registre una nueva cuenta como cliente. O que en configuraciones cambie su rol a CLIENTE.";
 				model.put("descripcion", error);
 				return "Error";
+			}else if(cliente == null && usuario.getRole().toString().equals("CLIENTE")) {
+				return "redirect:/cliente/registre";
 			}
 		} catch (Exception e) {
 			return "";
