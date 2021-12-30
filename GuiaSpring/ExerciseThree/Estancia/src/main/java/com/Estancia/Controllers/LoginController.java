@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Estancia.Entities.Usuario;
+import com.Estancia.Error.ErrorServicio;
 import com.Estancia.Service.UsuarioService;
 
 @Controller
@@ -37,16 +38,20 @@ public class LoginController {
 	}
 	
 	@GetMapping("/loginsuccess")
-	public String logincheck(HttpSession session) {
+	public String logincheck(HttpSession session) throws ErrorServicio{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth == null) {
-			return "redirect:/login";
-		}else {
-			if(usuarioService.role(auth.getName())) {
-				return "redirect:/familia";
+		try {
+			if (auth == null) {
+				return "redirect:/login";
 			}else {
-				return "redirect:/cliente";				
+				if(usuarioService.role(auth.getName())) {
+					return "redirect:/familia";
+				}else {
+					return "redirect:/cliente";				
+				}
 			}
+		} catch (Exception e) {
+			return "Error";
 		}
 	}
 	

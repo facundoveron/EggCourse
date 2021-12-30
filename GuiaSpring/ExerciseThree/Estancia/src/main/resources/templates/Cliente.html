@@ -13,7 +13,7 @@
 		<div class="card bg-light mb-3" style="max-width: 25rem; margin: auto; text-align: center;">
 			<div class="card-header">Ultimos pasos del Registro</div>
 			<div th:if="${error != null}" th:text="${error}" style="color: red"> Error de Credenciales</div>
-			<form th:action="@{/user/registre}" th:object="${usuario}" style="padding: 20px;" method="POST">
+			<form th:action="@{/cliente/registre}" th:object="${cliente}" style="padding: 20px;" method="POST">
 				<div class="">
 					<label for="exampleInputEmail1">Nombre</label>
 					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"

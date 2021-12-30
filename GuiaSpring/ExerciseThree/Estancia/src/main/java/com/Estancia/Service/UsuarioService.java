@@ -28,49 +28,49 @@ public class UsuarioService implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuarioRepository.findByEmail(username);
-		if(usuario != null) {
+		if (usuario != null) {
 			List<GrantedAuthority> permissions = new ArrayList<>();
 			GrantedAuthority p = new SimpleGrantedAuthority("ROLE_" + usuario.getRole().toString());
 			permissions.add(p);
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(true);
 			session.setAttribute("usuario", usuario);
-			return new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getClave(), permissions);
+			return new org.springframework.security.core.userdetails.User(usuario.getEmail(), usuario.getClave(),
+					permissions);
 		} else {
-			return null;			
+			return null;
 		}
 	}
-	
-	
+
 	@Transactional
-	public Usuario registrar(Usuario usuario) throws ErrorServicio{
+	public Usuario registrar(Usuario usuario) throws ErrorServicio {
 		try {
-			if(usuario.getEmail().trim().isEmpty() || usuario.getEmail() == null) {
+			if (usuario.getEmail().trim().isEmpty() || usuario.getEmail() == null) {
 				throw new ErrorServicio("Email vacio o nulo");
 			}
-			if(usuario.getAlias().trim().isEmpty() || usuario.getAlias() == null) {
+			if (usuario.getAlias().trim().isEmpty() || usuario.getAlias() == null) {
 				throw new ErrorServicio("Alias vacio o nulo");
 			}
-			if(usuario.getRole() == null) {
+			if (usuario.getRole() == null) {
 				throw new ErrorServicio("Rol nulo");
 			}
-			if(usuario.getClave().trim().isEmpty() || usuario.getClave() == null) {
+			if (usuario.getClave().trim().isEmpty() || usuario.getClave() == null) {
 				throw new ErrorServicio("Clave vacia o nula");
 			}
-			
+
 			Usuario user = usuarioRepository.findByEmail(usuario.getEmail());
-			if(user != null) {
+			if (user != null) {
 				throw new ErrorServicio("Este email ya esta registrado");
 			}
-			
-			if(usuario.getFechaBaja() != null) {
+
+			if (usuario.getFechaBaja() != null) {
 				throw new ErrorServicio("Este usuario esta dado de baja");
 			}
-			
+
 			usuario.setClave(generatePassword(usuario.getClave()));
 			usuario.setFechaAlta(new Date());
 			return usuarioRepository.save(usuario);
@@ -78,19 +78,46 @@ public class UsuarioService implements UserDetailsService {
 			throw e;
 		}
 	}
-	
+
 	@Transactional
 	public String generatePassword(String password) {
 		password = PasswordEncoder.encriptPassword(password);
 		return password;
 	}
-	
-	public Boolean role(String email) {
-		Usuario usuario = usuarioRepository.findByEmail(email);
-		if(usuario.getRole().toString().equals("FAMILIA")) {
-			return true;
-		}else {
-			return false;
+
+	@Transactional
+	public Boolean role(String email) throws ErrorServicio{
+		try {
+			Usuario usuario = searchByEmail(email);
+			return usuario.getRole().toString().equals("FAMILIA");
+		} catch (ErrorServicio e) {
+			throw e;
 		}
 	}
+	
+	@Transactional
+	public Boolean roleCliente(String email) throws ErrorServicio{
+		try {
+			Usuario usuario = searchByEmail(email);
+			return usuario.getRole().toString().equals("CLIENTE");
+		} catch (ErrorServicio e) {
+			throw e;
+		}
+	}
+
+	@Transactional
+	public Usuario searchByEmail(String email) throws ErrorServicio {
+		try {
+			if (email.trim().isEmpty() || email == null) {
+				throw new ErrorServicio("email null");
+			}
+			Usuario usuario = usuarioRepository.findByEmail(email);
+			return usuario;
+		} catch (ErrorServicio e) {
+			throw e;
+		} catch (NullPointerException e) {
+			throw new ErrorServicio("error de servicio");
+		}
+	}
+	
 }
