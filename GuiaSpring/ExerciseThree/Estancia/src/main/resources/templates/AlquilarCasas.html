@@ -9,8 +9,35 @@
 </head>
 
 <body>
-	<div>
-		Alquilemos casas
+	<div class="container">
+		<ul class="nav justify-content-end" style="background-color: white;">
+			<li class="nav-item">
+				<a class="nav-link active" href="/">Index</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/verCasa">Casas</a>
+			</li>
+		</ul>
+		<div>
+			<table class="table table-striped">
+				<thead>
+					<tr style="text-align: center">
+						<th>Pais</th>
+						<th>Ciudad</th>
+						<th>Minimo Dias</th>
+						<th>Maximo Dias</th>
+						<th>Precio</th>
+					</tr>
+				</thead>
+				<tr th:each="casas : ${casas}" style="text-align: center">
+					<td th:text="${casas.pais}"></td>
+					<td th:text="${casas.ciudad}"></td>
+					<td th:text="${casas.minDias}"></td>
+					<td th:text="${casas.maxDias}"></td>
+					<td><a class="btn btn-primary" href="#" role="button">Alquilar</a></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 

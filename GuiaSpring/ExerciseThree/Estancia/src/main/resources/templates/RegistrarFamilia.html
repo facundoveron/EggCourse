@@ -8,10 +8,36 @@
 		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
 </head>
 
-<body>
-	<div>
-		Registrar una familia
-		
+<body style="background-color: rgb(0, 64, 128);">
+	<div class="container" style="margin-top: 100px;">
+		<div class="card bg-light mb-3" style="max-width: 25rem; margin: auto; text-align: center;">
+			<div class="card-header">Ultimos pasos del Registro</div>
+			<div th:if="${error != null}" th:text="${error}" style="color: red"> Error de Credenciales</div>
+			<form th:action="@{/familia/registre}" th:object="${familia}" style="padding: 20px;" method="POST">
+				<div class="">
+					<label for="exampleInputEmail1">Nombre</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="nombre" th:value="${nombre}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Edad minima</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="edadMin" th:value="${edadMin}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Edad maxima</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="edadMax" th:value="${edadMax}">
+				</div>
+				<div class="">
+					<label for="exampleInputEmail1">Numero de hijos</label>
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+						name="numHijos" th:value="${numHijos}">
+				</div>
+				<button type="submit" class="btn btn-primary" style="margin-top: 10px;">Registrar</button>
+			</form>
+		</div>
+	</div>
 	</div>
 </body>
 

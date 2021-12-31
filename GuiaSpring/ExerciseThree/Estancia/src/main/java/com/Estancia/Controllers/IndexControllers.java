@@ -2,10 +2,7 @@ package com.Estancia.Controllers;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.Estancia.Entities.Cliente;
 import com.Estancia.Entities.Familia;
 import com.Estancia.Entities.Usuario;
+import com.Estancia.Error.ErrorServicio;
 import com.Estancia.Service.CasaService;
 import com.Estancia.Service.ClienteService;
 import com.Estancia.Service.FamiliaService;
@@ -23,8 +21,6 @@ import com.Estancia.Service.UsuarioService;
 @Controller
 @RequestMapping("/")
 public class IndexControllers {
-
-	private Log log = LogFactory.getLog(IndexControllers.class);
 
 	@Autowired
 	private CasaService casaService;
@@ -47,10 +43,10 @@ public class IndexControllers {
 	}
 
 	@GetMapping("alquilarFamilia")
-	public String ponerEnAlquiler(ModelMap model, HttpSession session) {
+	public String ponerEnAlquiler(ModelMap model, HttpSession session)throws ErrorServicio {
 		String email = SecurityContextHolder.getContext().getAuthentication().getName();		
+		Usuario usuario = usuarioService.searchByEmail(email); 
 		try {
-			Usuario usuario = usuarioService.searchByEmail(email);
 			Familia familia = familiaService.searchFamiliaByUsuario(usuario);
 			if (familia == null && usuario.getRole().toString().equals("CLIENTE")) {
 				String error = "Esta cuenta esta registrada como CLIENTE, este es el motivo por el cual la pagina marca error. Una posible solucion es que registre una nueva cuenta como FAMILIA. O que en configuraciones cambie su rol a FAMILIA";
@@ -62,7 +58,8 @@ public class IndexControllers {
 		} catch (Exception e) {
 			return "";
 		}
-		return "AlquilarCasas";
+		model.addAttribute("casas", familiaService.listHouseOfFamily(usuario));
+		return "Familia";
 	}
 
 	@GetMapping("alquilarCliente")
@@ -81,7 +78,8 @@ public class IndexControllers {
 		} catch (Exception e) {
 			return "";
 		}
-		return "AlquilarCasas";
+		model.put("casas", casaService.listAllCasa());
+		return "Casa";
 	}
 
 	@GetMapping("/verCasa")

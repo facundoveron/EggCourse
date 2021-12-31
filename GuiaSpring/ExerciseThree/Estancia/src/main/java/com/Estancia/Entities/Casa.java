@@ -33,6 +33,7 @@ public class Casa {
 	private Integer maxDias;
 	private Double precio;
 	private String tipoVivienda;
+	private Boolean alquilada;
 	
 	/**
 	 * Default constructor method
@@ -72,11 +73,21 @@ public class Casa {
 		this.maxDias = maxDias;
 		this.precio = precio;
 		this.tipoVivienda = tipoVivienda;
+		this.alquilada = false;
 	}
 
 	//Get and Set
+
 	public String getId() {
 		return id;
+	}
+
+	public Boolean getAlquilada() {
+		return alquilada;
+	}
+
+	public void setAlquilada(Boolean alquilada) {
+		this.alquilada = alquilada;
 	}
 
 	public void setId(String id) {

@@ -9,11 +9,20 @@
 	<title>Casas</title>
 </head>
 
-<body>
+<body
+	style="background-image: url(https://previews.123rf.com/images/tupungato/tupungato1611/tupungato161100002/66488913-casa-en-alquiler-simple-vector-ilustraci%C3%B3n-de-bienes-ra%C3%ADces-.jpg);">
+	<ul class="nav justify-content-end" style="background-color: white;">
+		<li class="nav-item">
+			<a class="nav-link active" href="/">Index</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="/verCasa">Casas</a>
+		</li>
+	</ul>
 	<div class="container" style="margin-top: 50px;">
 		<div class="list-group">
 			<tr th:each="casas : ${casas}">
-				<a href="#" class="list-group-item list-group-item-action active" style="margin: 50px 0px;">
+				<a th:href="@{/casa/alquilar/} + ${casas.id}" class="list-group-item list-group-item-action active" style="margin: 50px 0px;">
 					<div class="d-flex w-100 justify-content-between">
 						<h4>Tipo de vivienda:</h4>
 						<h4 class="mb-1" th:text="${casas.tipoVivienda}"></h4>

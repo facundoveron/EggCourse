@@ -1,10 +1,12 @@
 package com.Estancia.Service;
 
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Estancia.Entities.Casa;
 import com.Estancia.Entities.Familia;
 import com.Estancia.Entities.Usuario;
 import com.Estancia.Error.ErrorServicio;
@@ -52,5 +54,10 @@ public class FamiliaService {
 		} catch (NullPointerException e) {
 			return null;
 		}
+	}
+	
+	@Transactional
+	public Casa listHouseOfFamily(Usuario usuario) throws ErrorServicio{
+		return searchFamiliaByUsuario(usuario).getCasa();
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Estancia.Entities.Familia;
+import com.Estancia.Entities.Usuario;
 import com.Estancia.Error.ErrorServicio;
 import com.Estancia.Service.FamiliaService;
 import com.Estancia.Service.UsuarioService;
@@ -27,10 +28,11 @@ public class FamiliaController {
 	private UsuarioService usuarioService;
 	
 	@GetMapping("")
-	public String indexFamilia(ModelMap model) {
+	public String indexFamilia(ModelMap model)throws ErrorServicio {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+		Usuario usuario = usuarioService.searchByEmail(email);
 		try {
-			String email = SecurityContextHolder.getContext().getAuthentication().getName();
-			if(familiaService.searchFamiliaByUsuario(usuarioService.searchByEmail(email)) == null) {
+			if(familiaService.searchFamiliaByUsuario(usuario) == null) {
 				return "redirect:/familia/registre";
 			}
 		} catch (Exception e) {
@@ -38,6 +40,7 @@ public class FamiliaController {
 			model.addAttribute("descripcion", error);
 			return "Error";
 		}
+		model.addAttribute("casas", familiaService.listHouseOfFamily(usuario));
 		return "Familia";
 	}
 	
@@ -60,7 +63,11 @@ public class FamiliaController {
 			model.put("numHijos", familia.getNumHijos());
 			return "RegistrarFamilia";
 		}
-		return "Familia";
+		return "redirect:/casa/registrar";
 	}
 	
+	@GetMapping("/ponerAlquiler")
+	public String ponerAlquiler() {
+		return "Exito";
+	}
 }

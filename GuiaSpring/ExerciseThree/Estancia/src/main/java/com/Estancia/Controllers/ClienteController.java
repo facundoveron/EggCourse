@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.Estancia.Entities.Cliente;
 import com.Estancia.Error.ErrorServicio;
+import com.Estancia.Service.CasaService;
 import com.Estancia.Service.ClienteService;
 import com.Estancia.Service.UsuarioService;
 
@@ -28,6 +29,9 @@ public class ClienteController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private CasaService casaService;
+	
 	@GetMapping("")
 	public String cliente(ModelMap model) {
 		try {
@@ -40,7 +44,8 @@ public class ClienteController {
 			model.addAttribute("descripcion", error);
 			return "Error";
 		}
-		return "AlquilarCasas";
+		model.put("casas", casaService.listAllCasa());
+		return "Casa";
 	}
 	
 	@GetMapping("/registre")
