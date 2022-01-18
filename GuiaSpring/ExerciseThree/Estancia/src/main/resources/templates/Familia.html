@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Libreria</title>
+	<title>Alquilar tu Casa</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
 </head>
@@ -42,17 +42,8 @@
 							<h4>Numero:</h4>
 							<h4 class="mb-1" th:text="${casas.numero}"></h4>
 						</div>
-						<div class="d-flex w-100 justify-content-between">
-							<h4>Maximo de Dias:</h4>
-							<h4 class="mb-1" th:text="${casas.maxDias}"></h4>
-						</div>
-						<div class="d-flex w-100 justify-content-between">
-							<h4>Precio:</h4>
-							<h4 class="mb-1" th:text="${casas.precio}"></h4>
-						</div>
 					</a>
 				</tr>
-				<a class="btn btn-primary" th:href="@{/familia/ponerAlquiler}" role="button" style="margin-bottom: 10px;">Poner en Alquiler</a>
 			</div>
 		</div>
 	</div>

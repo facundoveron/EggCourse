@@ -55,8 +55,19 @@ public class CasaController {
 	}
 	
 	@GetMapping("/alquilar/{parametro}")
-	public String alquilar(@PathVariable("parametro") String idCasa) throws ErrorServicio{
-		casaService.alquilar(idCasa);
+	public String alquilar(ModelMap model,@PathVariable("parametro") String idCasa) throws ErrorServicio{
+		model.addAttribute("casa",casaService.searchById(idCasa));
+		return "AlquilarCasa";
+	}
+	
+	@PostMapping("/ponerEnAlquiler")
+	public String ponerEnAlquiler(ModelMap model, @ModelAttribute Casa casa) {
+		try {
+			casaService.alquilar(casa.getId());			
+		} catch (ErrorServicio e) {
+			model.put("error", e.getMessage());
+			return "AlquilarCasa";
+		}
 		return "Exito";
 	}
 }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Ajustar detalles del Alquiler</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous" />
+</head>
+
+<body style="background-color: rgb(0, 64, 128);">
+	<div class="container" style="margin-top: 50px;">
+		<form th:action="@{/casa/ponerEnAlquiler}" th:object="${casa}" method="POST">
+			<div class="row justify-content-start">
+				<div class="col-8">
+					<h3><strong>Tipo de Vivienda</strong></h3>
+					<div class="card" style="width: 100%;">
+						<div class="card-header bg-secondary" th:text="${casa.tipoVivienda}">
+						</div>
+					</div>
+				</div>
+				<div class="col-4">
+					<h3><strong>Pais</strong></h3>
+					<div class="card" style="width: 100%; margin-top: 10px;">
+						<div class="card-header bg-secondary" th:text="${casa.Pais}">
+						</div>
+					</div>
+				</div>
+				<div class="col-4" style="margin-top: 10px;">
+					<h3><strong>Ciudad</strong></h3>
+					<div class="card" style="width: 100%;">
+						<div class="card-header bg-secondary" th:text="${casa.Ciudad}">
+						</div>
+					</div>
+				</div>
+				<div class="col-8" style="margin-top: 10px;">
+					<h3><strong>Codigo Postal</strong></h3>
+					<div class="card" style="width: 100%;">
+						<div class="card-header bg-secondary" th:text="${casa.CodPostal}">
+						</div>
+					</div>
+				</div>
+				<div class="col-8" style="margin-top: 10px;">
+					<h3><strong>Numero</strong></h3>
+					<div class="card" style="width: 100%;">
+						<div class="card-header bg-secondary" th:text="${casa.numero}">
+						</div>
+					</div>
+				</div>
+				<div class="col-4" style="margin-top: 10px;">
+					<h3><strong>Calle</strong></h3>
+					<div class="card" style="width: 100%;">
+						<div class="card-header bg-secondary" th:text="${casa.calle}">
+						</div>
+					</div>
+				</div>
+				<div th:if="${error != null}" th:text="${error}" style="color: red"></div>
+				<div class="col-6" style="margin-top: 10px;">
+					<h3><strong>Dias Minimos</strong></h3>
+					<div class="input-group mb-3">
+						<input type="number" class="form-control" name="minDias" th:value="${casa.minDias}">
+					</div>
+				</div>
+				<div class="col-6" style="margin-top: 10px;">
+					<h3><strong>Dias Maximos</strong></h3>
+					<div class="input-group mb-3">
+						<input type="number" class="form-control" name="maxDias" th:value="${casa.maxDias}">
+					</div>
+				</div>
+				<div class="col-6" style="margin-top: 10px;">
+					<h3><strong>Fecha Desde</strong></h3>
+					<div class="input-group mb-3">
+						<input type="date" class="form-control" pattern="yyyy-MM-dd" name="fechaDesde" th:value="${casa.fechaDesde}">
+					</div>
+				</div>
+				<div class="col-6" style="margin-top: 10px;">
+					<h3><strong>Fecha Hasta</strong></h3>
+					<div class="input-group mb-3">
+						<input type="date" class="form-control" pattern="yyyy-MM-dd" name="fechaHasta" th:value="${casa.fechaHasta}">
+					</div>
+				</div>
+				<div class="col-12" style="margin-top: 10px;">
+					<h3><strong>Precio</strong></h3>
+					<div class="input-group mb-3">
+						<input type="number" class="form-control" name="precio" th:value="${casa.Precio}">
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-dark" style="margin-top: 10px;">Poner en Alquiler</button>
+			<a class="btn btn-danger" href="/" role="button" style="margin-top: 10px;">Volver</a>
+		</form>
+	</div>
+</body>
+
+</html>

@@ -92,6 +92,9 @@ public class CasaService {
 	public void alquilar(String id) throws ErrorServicio {
 		try {
 			Casa casa = searchById(id);
+			if(casa == null) {
+				throw new ErrorServicio("casa no registrada");
+			}
 			casa.setAlquilada(false);
 			casaRepository.save(casa);
 		} catch (Exception e) {
